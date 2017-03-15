@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 public class MyMouseAdapter extends MouseAdapter {
 	private Random generator = new Random();
+	public Color c2 = Color.WHITE;
 	public void mousePressed(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -80,26 +81,56 @@ public class MyMouseAdapter extends MouseAdapter {
 							//On the left column and on the top row... do nothing
 						} else {
 							//On the grid other than on the left column and on the top row:
-							Color newColor = null;
+							Color newColor = Color.WHITE;
 							switch (generator.nextInt(5)) {
 							case 0:
+								if( !isRepeated(c2, Color.YELLOW)){
+
 								newColor = Color.YELLOW;
 								break;
+								}
+								break;
+									
+								
 							case 1:
+								if( !isRepeated(c2, Color.MAGENTA)){
+							
 								newColor = Color.MAGENTA;
 								break;
+								}
+								break;
+								
 							case 2:
+								if(!isRepeated(c2, Color.BLACK)){
+		
 								newColor = Color.BLACK;
 								break;
+								}
+								break;
+								
 							case 3:
-								newColor = new Color(0x964B00);   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
+								if( !isRepeated(c2, new Color(0x964B00))){
+									
+								newColor = new Color(0x964B00); 
 								break;
+								//Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
+								}
+								break;
+								
 							case 4:
-								newColor = new Color(0xB57EDC);   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
+								if( !isRepeated(c2, new Color(0xB57EDC))){
+									
+								newColor = new Color(0xB57EDC); 
+								 //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
 								break;
+								}
+								break;
+								
 							}
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
-							myPanel.repaint();
+						    myPanel.repaint();
+						    c2 = newColor;
+							
 						}
 					}
 				}
@@ -113,5 +144,14 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
+	}
+	public boolean isRepeated(Color c1 ,Color c2 ){
+		if( c1.equals(c2)){
+			return true;
+		}
+		else {
+		return false;
+		}
+		
 	}
 }
